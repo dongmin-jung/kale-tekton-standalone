@@ -39,7 +39,7 @@ interface ICellMetadataEditorMultiWorkerDialog {s
   toggleDialog: Function;
 }
 
-export const ICellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellMetadataEditorMultiWorkerDialog> = props => {
+export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellMetadataEditorMultiWorkerDialog> = props => {
   const handleClose = () => {
     props.toggleDialog();
   };
