@@ -229,6 +229,7 @@ export class InlineMetadata extends React.Component<IProps, IState> {
 
   // TODO: 고치기
   createDistributeText() {
+    console.log('createDistributeText');
     const distributeType = Object.keys(this.props.distribute).includes('MultiWorkerMirroredStrategy')
       ? 'MultiWorkerMirroredStrategy'
       : Object.keys(this.props.distribute).includes('ParameterServerStrategy')
@@ -236,11 +237,10 @@ export class InlineMetadata extends React.Component<IProps, IState> {
       : undefined;
     let text = '';
     if (distributeType === 'MultiWorkerMirroredStrategy') {
-
-      text = `Distribute: MultiWorkerMirroredStrategy with ${this.props.numWorkers} workers`
+      text = `Distribute: MultiWorkerMirroredStrategy with ${this.props.numWorkers} workers`;
     }
     else if (distributeType === 'ParameterServerStrategy') {
-      text = `Distribute: ParameterServerStrategy with ${this.props.numParameterServers} parameter servers and ${this.props.numWorkers} workers`
+      text = `Distribute: ParameterServerStrategy with ${this.props.numParameterServers} parameter servers and ${this.props.numWorkers} workers`;
     }
 
     return distributeType !== undefined ? (

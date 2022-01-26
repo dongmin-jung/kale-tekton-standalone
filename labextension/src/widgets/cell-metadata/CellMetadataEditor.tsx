@@ -198,6 +198,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     state: Readonly<IState>,
     props: Readonly<IProps>,
   ): IState {
+    console.log('updateBlockDependenciesChoices');
     if (!props.notebook) {
       return null;
     }
@@ -221,6 +222,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     state: Readonly<IState>,
     props: Readonly<IProps>,
   ): IState {
+    console.log('updatePreviousStepName');
     if (!props.notebook) {
       return null;
     }
@@ -237,6 +239,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
   }
 
   updateCurrentBlockName = (value: string) => {
+    console.log('updateCurrentBlockName');
     const oldBlockName: string = this.props.stepName;
     let currentCellMetadata = {
       prevBlockNames: this.props.stepDependencies,
@@ -261,6 +264,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
    * Even handler of the MultiSelect used to select the dependencies of a block
    */
   updatePrevBlocksNames = (previousBlocks: string[]) => {
+    console.log('updatePrevBlockNames');
     let currentCellMetadata = {
       blockName: this.props.stepName,
       limits: this.props.limits,
@@ -328,6 +332,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
       distributeValue?: string;
     }[],
   ) => {
+    console.log('updateCurrentDistribute');
     let distribute = this.props.distribute;
     let numParameterServers = this.props.numParameterServers;
     let numWorkers = this.props.numWorkers;
@@ -346,7 +351,9 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
         }
       }
       if (action.action === 'delete') {
-        distribute = undefined;
+        distribute = '';
+        numWorkers = '';
+        numParameterServers = '';
       }
     });
 
@@ -405,6 +412,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
   }
 
   toggleTagsEditorMultiWorkerDialog() {
+    console.log('toggleTagsEditorMultiWorkerDialog');
     this.setState({
       cellMetadataEditorMultiWorkerDialog: !this.state.cellMetadataEditorMultiWorkerDialog,
     });
@@ -500,12 +508,12 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     }
                     color="primary"
                     variant="contained"
-                    size="small"
+                    size="medium"
                     title="MultiWorkerMirroredStrategy"
                     onClick={_ => this.toggleTagsEditorMultiWorkerDialog()}
                     style={{ width: '20%' }}
                   >
-                    MultiWorkerMirroredStrategy
+                    MultiWorker
                   </Button>
                 </div>
               ) : (

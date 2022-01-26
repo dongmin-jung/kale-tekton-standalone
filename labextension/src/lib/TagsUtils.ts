@@ -84,6 +84,7 @@ export default class TagsUtils {
     notebook: Notebook,
     index: number,
   ): IKaleCellTags {
+    console.log('getKaleCellTags');
     const tags: string[] = CellUtils.getCellMetaData(notebook, index, 'tags');
     if (tags) {
       let b_name = tags.map(v => {
@@ -155,6 +156,7 @@ export default class TagsUtils {
     metadata: IKaleCellTags,
     save: boolean,
   ): Promise<any> {
+    console.log('setKaleCellTags');
     // make the dict to save to tags
     let nb = metadata.blockName;
     // not a reserved name
