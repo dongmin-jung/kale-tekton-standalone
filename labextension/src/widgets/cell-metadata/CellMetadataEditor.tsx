@@ -538,10 +538,12 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
         />
         <CellMetadataEditorMultiWorkerDialog
           open={this.state.cellMetadataEditorMultiWorkerDialog}
-          // toggleDialog={this.toggleTagsEditorDialog}
-          // stepName={this.props.stepName}
-          // limits={this.props.limits || {}}
-          // updateLimits={this.updateCurrentLimits}
+          toggleDialog={this.toggleTagsEditorMultiWorkerDialog}
+          stepName={this.props.stepName}
+          updateDistribute={this.updateCurrentDistribute}
+          distribute={this.props.distribute||''}
+          numWorkers={this.props.numWorkers||''}
+          numParameterServers={this.props.numParameterServers||''}
         />
       </React.Fragment>
     );
