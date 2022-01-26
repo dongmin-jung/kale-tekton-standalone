@@ -329,7 +329,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     actions: {
       action: 'update' | 'delete';
       distributeKey: string;
-      distributeValue?: string;
+      distributeValue: string;
     }[],
   ) => {
     console.log('updateCurrentDistribute');
@@ -513,7 +513,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     onClick={_ => this.toggleTagsEditorMultiWorkerDialog()}
                     style={{ width: '20%' }}
                   >
-                    MultiWorker
+                    Multi
                   </Button>
                 </div>
               ) : (
