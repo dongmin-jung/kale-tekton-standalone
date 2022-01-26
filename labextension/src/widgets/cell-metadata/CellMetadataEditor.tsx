@@ -503,7 +503,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     size="small"
                     title="MultiWorkerMirroredStrategy"
                     onClick={_ => this.toggleTagsEditorMultiWorkerDialog()}
-                    style={{ width: '5%' }}
+                    style={{ width: '20%' }}
                   >
                     MultiWorkerMirroredStrategy
                   </Button>

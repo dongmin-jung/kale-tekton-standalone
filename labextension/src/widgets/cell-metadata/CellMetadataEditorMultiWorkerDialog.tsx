@@ -56,6 +56,7 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
     };
   };
 
+  const distribute = props.distribute || undefined;
   const numWorkers = props.numWorkers || undefined;
 
   return (
@@ -102,11 +103,12 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
               alignItems="center"
             >
               <Switch
-                checked={numWorkers !== undefined}
+                checked={distribute !== undefined}
                 onChange={c => {
                   if (c.target.checked) {
                     // default value
                     props.updateDistribute([
+                      distributeAction('update', 'distribute', 'MultiWorkerMirroredStrategy'),
                       distributeAction('update', 'numWorkers', '1'),
                     ]);
                   } else {
