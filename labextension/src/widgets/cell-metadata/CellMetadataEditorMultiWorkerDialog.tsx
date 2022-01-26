@@ -56,8 +56,8 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
     };
   };
 
-  const distribute = props.distribute || undefined;
-  const numWorkers = props.numWorkers || undefined;
+  const distribute = props.distribute || '';
+  const numWorkers = props.numWorkers || '';
 
   return (
     <Dialog
@@ -103,7 +103,7 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
               alignItems="center"
             >
               <Switch
-                checked={distribute !== undefined}
+                checked={distribute !== ''}
                 onChange={c => {
                   if (c.target.checked) {
                     // default value
@@ -135,12 +135,12 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
           >
             <Grid item xs={6}>
               <Input
-                disabled={numWorkers === undefined}
+                disabled={numWorkers === ''}
                 variant="outlined"
                 label="Number of Workers"
-                value={numWorkers || 1}
-                updateValue={(v: string) =>
-                  props.updateDistribute([distributeAction('update', numWorkers, v)])
+                value={parseInt(numWorkers) || 0}
+                updateValue={(v: number) =>
+                  props.updateDistribute([distributeAction('update', numWorkers, v.toString())])
                 }
                 style={{ width: '95%' }}
               />
