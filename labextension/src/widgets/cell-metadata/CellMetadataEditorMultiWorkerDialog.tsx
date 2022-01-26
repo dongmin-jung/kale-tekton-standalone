@@ -32,7 +32,7 @@ import { Select } from '../../components/Select';
 interface ICellMetadataEditorMultiWorkerDialog {
   open: boolean;
   stepName: string;
-  distribute: { [id: string]: string };
+  distribute: string;
   updateDistribute: Function;
   numWorkers: string;
   numParameterServers?: string;
