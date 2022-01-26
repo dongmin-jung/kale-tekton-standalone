@@ -29,7 +29,7 @@ import ColorUtils from '../../lib/ColorUtils';
 import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 
-interface ICellMetadataEditorMultiWorkerDialog {s
+interface ICellMetadataEditorMultiWorkerDialog {
   open: boolean;
   stepName: string;
   distribute: { [id: string]: string };
