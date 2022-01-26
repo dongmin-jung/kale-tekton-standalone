@@ -23,6 +23,9 @@ interface IKaleCellTags {
   blockName: string;
   prevBlockNames: string[];
   limits?: { [id: string]: string };
+  distribute?: string;
+  numParameterServers?: string;
+  numWorkers?: string;
 }
 
 /** Contains utility functions for manipulating/handling Kale cell tags. */
@@ -108,10 +111,32 @@ export default class TagsUtils {
           // get the limit key and value
           limits[values[1]] = values[2];
         });
+
+      let distribute = tags.map(v => {
+        if (v.startsWith('distribute:')) {
+          return v.replace('distribute:', '');
+        }
+      });
+
+      let numWorkers = tags.map(v => {
+        if (v.startsWith('numWorkers:')) {
+          return v.replace('numWorkers:', '');
+        }
+      });
+
+      let numParameterServers = tags.map(v => {
+        if (v.startsWith('numParameterServers:')) {
+          return v.replace('numParameterServers:', '');
+        }
+      });
+
       return {
         blockName: b_name[0],
         prevBlockNames: prevs,
         limits: limits,
+        distribute: distribute[0],
+        numWorkers: numWorkers[0],
+        numParameterServers: numParameterServers[0],
       };
     }
     return null;
@@ -138,12 +163,23 @@ export default class TagsUtils {
     }
     const stepDependencies = metadata.prevBlockNames || [];
     const limits = metadata.limits || {};
+    const distribute = metadata.distribute || '';
+    const numWorkers = metadata.numWorkers || '';
+    const numParameterServers = metadata.numParameterServers || '';
     const tags = [nb]
       .concat(stepDependencies.map(v => 'prev:' + v))
       .concat(
         Object.keys(limits).map(lim => 'limit:' + lim + ':' + limits[lim]),
       );
-
+    if (distribute !== '') {
+      tags.concat(['distribute:' + distribute]);
+      if (numWorkers !== '') {
+        tags.concat(['numWorkers:' + numWorkers]);
+      }
+      if (numParameterServers !== ''){
+        tags.concat(['numParameterServers:' + numParameterServers]);
+      }
+    }
     return CellUtils.setCellMetaData(notebookPanel, index, 'tags', tags, save);
   }
 

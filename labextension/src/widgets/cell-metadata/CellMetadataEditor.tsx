@@ -23,6 +23,7 @@ import ColorUtils from '../../lib/ColorUtils';
 import { CellMetadataContext } from '../../lib/CellMetadataContext';
 import { Button, IconButton } from '@material-ui/core';
 import { CellMetadataEditorDialog } from './CellMetadataEditorDialog';
+import { CellMetadataEditorMultiWorkerDialog } from './CellMetadataEditorMultiWorkerDialog';
 import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 import { SelectMulti } from '../../components/SelectMulti';
@@ -74,6 +75,9 @@ export interface IProps {
   stepDependencies: string[];
   // Resource limits, like gpu limits
   limits?: { [id: string]: string };
+  distribute?: string;
+  numParameterServers?: string;
+  numWorkers?: string;
 }
 
 // this stores the name of a block and its color (form the name hash)
@@ -90,6 +94,7 @@ interface IState {
   // XXX (stefano): statement of updateBlockDependenciesChoices and
   // XXX (stefano): updatePreviousStepName don't allow me.
   cellMetadataEditorDialog?: boolean;
+  cellMetadataEditorMultiWorkerDialog?: boolean;
 }
 
 const DefaultState: IState = {
@@ -97,6 +102,7 @@ const DefaultState: IState = {
   stepNameErrorMsg: STEP_NAME_ERROR_MSG,
   blockDependenciesChoices: [],
   cellMetadataEditorDialog: false,
+  cellMetadataEditorMultiWorkerDialog: false,
 };
 
 /**
@@ -116,6 +122,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     this.updateCurrentCellType = this.updateCurrentCellType.bind(this);
     this.updatePrevBlocksNames = this.updatePrevBlocksNames.bind(this);
     this.toggleTagsEditorDialog = this.toggleTagsEditorDialog.bind(this);
+    this.toggleTagsEditorMultiWorkerDialog = this.toggleTagsEditorMultiWorkerDialog.bind(this);
   }
 
   componentWillUnmount() {
@@ -234,6 +241,9 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     let currentCellMetadata = {
       prevBlockNames: this.props.stepDependencies,
       limits: this.props.limits,
+      distribute: this.props.distribute,
+      numParameterServers: this.props.numParameterServers,
+      numWorkers: this.props.numWorkers,
       blockName: value,
     };
 
@@ -254,6 +264,9 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     let currentCellMetadata = {
       blockName: this.props.stepName,
       limits: this.props.limits,
+      distribute: this.props.distribute,
+      numParameterServers: this.props.numParameterServers,
+      numWorkers: this.props.numWorkers,
       prevBlockNames: previousBlocks,
     };
 
@@ -291,6 +304,9 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     let currentCellMetadata = {
       blockName: this.props.stepName,
       prevBlockNames: this.props.stepDependencies,
+      distribute: this.props.distribute,
+      numParameterServers: this.props.numParameterServers,
+      numWorkers: this.props.numWorkers,
       limits: limits,
     };
 
@@ -301,6 +317,56 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
       true,
     );
   };
+
+  /**
+   * Event triggered when the the CellMetadataEditorMultiWorkerDialog dialog is closed
+   */
+   updateCurrentDistribute = (
+    actions: {
+      action: 'update' | 'delete';
+      distributeKey: string;
+      distributeValue?: string;
+    }[],
+  ) => {
+    let distribute = this.props.distribute;
+    let numParameterServers = this.props.numParameterServers;
+    let numWorkers = this.props.numWorkers;
+    actions.forEach(action => {
+      if (action.action === 'update') {
+        switch(action.distributeKey){
+          case 'distribute':
+            distribute = action.distributeValue;
+            break;
+          case 'numWorkers':
+            numWorkers = action.distributeValue;
+            break;
+          case 'numParameterServers':
+            numParameterServers = action.distributeValue;
+            break;
+        }
+      }
+      if (action.action === 'delete') {
+        distribute = undefined;
+      }
+    });
+
+    let currentCellMetadata = {
+      blockName: this.props.stepName,
+      prevBlockNames: this.props.stepDependencies,
+      limits: this.props.limits,
+      distribute: distribute,
+      numParameterServers: numParameterServers,
+      numWorkers: numWorkers,
+    };
+
+    TagsUtils.setKaleCellTags(
+      this.props.notebook,
+      this.context.activeCellIndex,
+      currentCellMetadata,
+      true,
+    );
+  };
+
 
   /**
    * Function called before updating the value of the block name input text
@@ -335,6 +401,12 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
   toggleTagsEditorDialog() {
     this.setState({
       cellMetadataEditorDialog: !this.state.cellMetadataEditorDialog,
+    });
+  }
+
+  toggleTagsEditorMultiWorkerDialog() {
+    this.setState({
+      cellMetadataEditorMultiWorkerDialog: !this.state.cellMetadataEditorMultiWorkerDialog,
     });
   }
 
@@ -422,6 +494,19 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                   >
                     GPU
                   </Button>
+                  <Button
+                    disabled={
+                      !(this.props.stepName && this.props.stepName.length > 0)
+                    }
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    title="MultiWorkerMirroredStrategy"
+                    onClick={_ => this.toggleTagsEditorMultiWorkerDialog()}
+                    style={{ width: '5%' }}
+                  >
+                    MultiWorkerMirroredStrategy
+                  </Button>
                 </div>
               ) : (
                 ''
@@ -450,6 +535,13 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
           stepName={this.props.stepName}
           limits={this.props.limits || {}}
           updateLimits={this.updateCurrentLimits}
+        />
+        <CellMetadataEditorMultiWorkerDialog
+          open={this.state.cellMetadataEditorMultiWorkerDialog}
+          // toggleDialog={this.toggleTagsEditorDialog}
+          // stepName={this.props.stepName}
+          // limits={this.props.limits || {}}
+          // updateLimits={this.updateCurrentLimits}
         />
       </React.Fragment>
     );
