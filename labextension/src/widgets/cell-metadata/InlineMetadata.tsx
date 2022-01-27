@@ -234,7 +234,7 @@ export class InlineMetadata extends React.Component<IProps, IState> {
       ? 'MultiWorkerMirroredStrategy'
       : Object.keys(this.props.distribute).includes('distribute:ParameterServerStrategy')
       ? 'ParameterServerStrategy'
-      : undefined;
+      : '';
     let text = '';
     if (distributeType === 'MultiWorkerMirroredStrategy') {
       text = `Distribute: MultiWorkerMirroredStrategy with ${this.props.numWorkers} workers`;
@@ -243,7 +243,7 @@ export class InlineMetadata extends React.Component<IProps, IState> {
       text = `Distribute: ParameterServerStrategy with ${this.props.numParameterServers} parameter servers and ${this.props.numWorkers} workers`;
     }
 
-    return distributeType !== undefined ? (
+    return distributeType !== '' ? (
       <React.Fragment>
         <p style={{ fontStyle: 'italic', marginLeft: '10px' }}>
           {text}
