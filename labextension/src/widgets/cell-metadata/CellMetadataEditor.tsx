@@ -338,6 +338,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     let numWorkers = this.props.numWorkers;
     actions.forEach(action => {
       if (action.action === 'update') {
+        console.log('update action');
         switch(action.distributeKey){
           case 'distribute':
             distribute = action.distributeValue;
@@ -350,7 +351,8 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
             break;
         }
       }
-      if (action.action === 'delete') {
+      else if (action.action === 'delete') {
+        console.log('delete action');
         distribute = '';
         numWorkers = '';
         numParameterServers = '';
