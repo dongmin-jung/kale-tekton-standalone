@@ -129,9 +129,9 @@ export default class TagsUtils {
         blockName: b_name[0],
         prevBlockNames: prevs,
         limits: limits,
-        distribute: distribute[0],
-        numWorkers: numWorkers[0],
-        numParameterServers: numParameterServers[0],
+        distribute: distribute[0] || '',
+        numWorkers: numWorkers[0] || '',
+        numParameterServers: numParameterServers[0] || '',
       };
     }
     return null;

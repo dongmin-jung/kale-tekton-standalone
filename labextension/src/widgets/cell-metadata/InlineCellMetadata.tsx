@@ -237,6 +237,9 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
         tags = {
           blockName: '',
           prevBlockNames: [],
+          distribute: '',
+          numWorkers: '',
+          numParameterServers: '',
         };
       }
       let previousBlockName = '';
