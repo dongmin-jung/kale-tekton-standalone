@@ -209,6 +209,7 @@ export class InlineMetadata extends React.Component<IProps, IState> {
   }
 
   createLimitsText() {
+    console.log('createLimitsText');
     const gpuType = Object.keys(this.props.limits).includes('nvidia.com/gpu')
       ? 'nvidia.com/gpu'
       : Object.keys(this.props.limits).includes('amd.com/gpu')
@@ -227,7 +228,6 @@ export class InlineMetadata extends React.Component<IProps, IState> {
     );
   }
 
-  // TODO: 고치기
   createDistributeText() {
     console.log('createDistributeText');
     const distributeType = Object.keys(this.props.distribute).includes('MultiWorkerMirroredStrategy')

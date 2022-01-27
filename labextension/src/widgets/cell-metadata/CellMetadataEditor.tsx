@@ -292,6 +292,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
       limitValue?: string;
     }[],
   ) => {
+    console.log('updateCurrentLimits');
     let limits = { ...this.props.limits };
     actions.forEach(action => {
       if (action.action === 'update') {
