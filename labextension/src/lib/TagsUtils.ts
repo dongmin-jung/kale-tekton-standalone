@@ -114,16 +114,16 @@ export default class TagsUtils {
         });
 
       let distribute = tags
-        .filter(v => v.startsWith('distribute:'))
-        .map(v => v.replace('distribute:', ''));
+        .filter(v => v.startsWith('distribute:'));
+        // .map(v => v.replace('distribute:', ''));
 
       let numWorkers = tags
-        .filter(v => v.startsWith('numWorkers:'))
-        .map(v => v.replace('numWorkers:', ''));
+        .filter(v => v.startsWith('numWorkers:'));
+        // .map(v => v.replace('numWorkers:', ''));
 
       let numParameterServers = tags
-        .filter(v => v.startsWith('numParameterServers:'))
-        .map(v => v.replace('numParameterServers:', ''));
+        .filter(v => v.startsWith('numParameterServers:'));
+        // .map(v => v.replace('numParameterServers:', ''));
 
       return {
         blockName: b_name[0],

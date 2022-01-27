@@ -230,9 +230,9 @@ export class InlineMetadata extends React.Component<IProps, IState> {
 
   createDistributeText() {
     console.log('createDistributeText');
-    const distributeType = Object.keys(this.props.distribute).includes('MultiWorkerMirroredStrategy')
+    const distributeType = Object.keys(this.props.distribute).includes('distribute:MultiWorkerMirroredStrategy')
       ? 'MultiWorkerMirroredStrategy'
-      : Object.keys(this.props.distribute).includes('ParameterServerStrategy')
+      : Object.keys(this.props.distribute).includes('distribute:ParameterServerStrategy')
       ? 'ParameterServerStrategy'
       : undefined;
     let text = '';

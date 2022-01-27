@@ -337,37 +337,39 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     let distribute = this.props.distribute;
     let numParameterServers = this.props.numParameterServers;
     let numWorkers = this.props.numWorkers;
+    let currentCellMetadata = {};
     actions.forEach(action => {
       if (action.action === 'update') {
         console.log('update action');
         switch(action.distributeKey){
           case 'distribute':
-            distribute = action.distributeValue;
+            distribute = 'distribute:' + action.distributeValue;
             break;
           case 'numWorkers':
-            numWorkers = action.distributeValue;
+            numWorkers = 'numWorkers:' + action.distributeValue;
             break;
           case 'numParameterServers':
-            numParameterServers = action.distributeValue;
+            numParameterServers = 'numParameterServers:' + action.distributeValue;
             break;
         }
+        currentCellMetadata = {
+          blockName: this.props.stepName,
+          prevBlockNames: this.props.stepDependencies,
+          limits: this.props.limits,
+          distribute: distribute,
+          numParameterServers: numParameterServers,
+          numWorkers: numWorkers,
+        };
       }
       else if (action.action === 'delete') {
         console.log('delete action');
-        distribute = '';
-        numWorkers = '';
-        numParameterServers = '';
+        currentCellMetadata = {
+          blockName: this.props.stepName,
+          prevBlockNames: this.props.stepDependencies,
+          limits: this.props.limits,
+        };
       }
     });
-
-    let currentCellMetadata = {
-      blockName: this.props.stepName,
-      prevBlockNames: this.props.stepDependencies,
-      limits: this.props.limits,
-      distribute: distribute,
-      numParameterServers: numParameterServers,
-      numWorkers: numWorkers,
-    };
 
     TagsUtils.setKaleCellTags(
       this.props.notebook,

@@ -262,9 +262,9 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
           blockName={tags.blockName}
           stepDependencies={tags.prevBlockNames}
           limits={tags.limits || {}}
-          distribute={tags.distribute || ''}
-          numWorkers={tags.numWorkers || ''}
-          numParameterServers={tags.numParameterServers || ''}
+          distribute={tags.distribute}
+          numWorkers={tags.numWorkers}
+          numParameterServers={tags.numParameterServers}
           previousBlockName={previousBlockName}
           cellIndex={index}
         />,
