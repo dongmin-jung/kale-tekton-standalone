@@ -75,9 +75,9 @@ export interface IProps {
   stepDependencies: string[];
   // Resource limits, like gpu limits
   limits?: { [id: string]: string };
-  distribute?: string;
-  numParameterServers?: string;
-  numWorkers?: string;
+  distribute: string;
+  numParameterServers: string;
+  numWorkers: string;
 }
 
 // this stores the name of a block and its color (form the name hash)
@@ -340,6 +340,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     actions.forEach(action => {
       if (action.action === 'update') {
         console.log('update action');
+        console.log(action);
         switch(action.distributeKey){
           case 'distribute':
             distribute = 'distribute:' + action.distributeValue;

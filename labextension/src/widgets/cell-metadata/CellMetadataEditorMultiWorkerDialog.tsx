@@ -34,8 +34,8 @@ interface ICellMetadataEditorMultiWorkerDialog {
   stepName: string;
   distribute: string;
   updateDistribute: Function;
-  numWorkers?: string;
-  numParameterServers?: string;
+  numWorkers: string;
+  numParameterServers: string;
   toggleDialog: Function;
 }
 
@@ -138,7 +138,7 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
                 disabled={numWorkers === ''}
                 variant="outlined"
                 label="Number of Workers"
-                value={parseInt(numWorkers) || 0}
+                value={parseInt(numWorkers) || 1}
                 updateValue={(v: number) =>
                   props.updateDistribute([distributeAction('update', numWorkers, v.toString())])
                 }

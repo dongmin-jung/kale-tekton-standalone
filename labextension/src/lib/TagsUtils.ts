@@ -23,9 +23,9 @@ interface IKaleCellTags {
   blockName: string;
   prevBlockNames: string[];
   limits?: { [id: string]: string };
-  distribute?: string;
-  numParameterServers?: string;
-  numWorkers?: string;
+  distribute: string;
+  numParameterServers: string;
+  numWorkers: string;
 }
 
 /** Contains utility functions for manipulating/handling Kale cell tags. */
