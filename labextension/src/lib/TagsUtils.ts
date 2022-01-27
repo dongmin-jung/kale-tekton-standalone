@@ -161,20 +161,23 @@ export default class TagsUtils {
     const stepDependencies = metadata.prevBlockNames || [];
     const limits = metadata.limits || {};
     const distribute = metadata.distribute || '';
+    console.log(distribute);
     const numWorkers = metadata.numWorkers || '';
+    console.log(numWorkers);
     const numParameterServers = metadata.numParameterServers || '';
+    console.log(numParameterServers);
     const tags = [nb]
       .concat(stepDependencies.map(v => 'prev:' + v))
       .concat(
         Object.keys(limits).map(lim => 'limit:' + lim + ':' + limits[lim]),
       );
     if (distribute !== '') {
-      tags.concat(['distribute:' + distribute]);
+      tags.concat([distribute]);
       if (numWorkers !== '') {
-        tags.concat(['numWorkers:' + numWorkers]);
+        tags.concat([numWorkers]);
       }
       if (numParameterServers !== ''){
-        tags.concat(['numParameterServers:' + numParameterServers]);
+        tags.concat([numParameterServers]);
       }
     }
     console.log(tags)
