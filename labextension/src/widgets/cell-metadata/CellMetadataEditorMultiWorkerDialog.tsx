@@ -34,7 +34,7 @@ interface ICellMetadataEditorMultiWorkerDialog {
   stepName: string;
   distribute: string;
   updateDistribute: Function;
-  numWorkers: string;
+  numWorkers?: string;
   numParameterServers?: string;
   toggleDialog: Function;
 }
@@ -83,7 +83,7 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
               justify="flex-start"
               alignItems="center"
             >
-              <p>MultiWorkerMirroredStrategy setting for step </p>
+              <p>MultiWorkerMirroredStrategy for step </p>
               <Chip
                 className={'kale-chip'}
                 style={{
