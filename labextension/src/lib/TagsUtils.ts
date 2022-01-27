@@ -243,6 +243,9 @@ export default class TagsUtils {
     let cellMetadata = {
       prevBlockNames: previousBlocks,
       blockName: value,
+      distribute: '',
+      numWorkers: '',
+      numParameterServers: '',
     };
     TagsUtils.setKaleCellTags(
       notebook,
