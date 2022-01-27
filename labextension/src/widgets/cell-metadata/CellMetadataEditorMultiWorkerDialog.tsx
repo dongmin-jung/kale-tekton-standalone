@@ -140,7 +140,7 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
                 label="Number of Workers"
                 value={parseInt(numWorkers) || 1}
                 updateValue={(v: number) =>
-                  props.updateDistribute([distributeAction('update', numWorkers, v.toString())])
+                  props.updateDistribute([distributeAction('update', 'numWorkers', v.toString())])
                 }
                 style={{ width: '95%' }}
               />
