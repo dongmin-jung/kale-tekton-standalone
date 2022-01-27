@@ -176,6 +176,7 @@ export default class TagsUtils {
         tags.concat(['numParameterServers:' + numParameterServers]);
       }
     }
+    console.log(tags)
     return CellUtils.setCellMetaData(notebookPanel, index, 'tags', tags, save);
   }
 

@@ -220,6 +220,7 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
     if (!this.props.notebook) {
       return;
     }
+    console.log('generateEditorsPropsAndInlineMetadata');
     const metadata: any[] = [];
     const editors: Editors = {};
     const cells = this.props.notebook.model.cells;
@@ -255,6 +256,7 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
         numWorkers: tags.numWorkers || '',
         numParameterServers: tags.numParameterServers || '',
       };
+      console.log(editors[index]);
       metadata.push(
         <InlineMetadata
           key={index}
@@ -269,6 +271,7 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
           cellIndex={index}
         />,
       );
+      console.log(metadata);
     }
 
     this.setState({
