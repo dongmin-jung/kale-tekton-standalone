@@ -113,23 +113,17 @@ export default class TagsUtils {
           limits[values[1]] = values[2];
         });
 
-      let distribute = tags.map(v => {
-        if (v.startsWith('distribute:')) {
-          return v.replace('distribute:', '');
-        }
-      });
+      let distribute = tags
+        .filter(v => v.startsWith('distribute:'))
+        .map(v => v.replace('distribute:', ''));
 
-      let numWorkers = tags.map(v => {
-        if (v.startsWith('numWorkers:')) {
-          return v.replace('numWorkers:', '');
-        }
-      });
+      let numWorkers = tags
+        .filter(v => v.startsWith('numWorkers:'))
+        .map(v => v.replace('numWorkers:', ''));
 
-      let numParameterServers = tags.map(v => {
-        if (v.startsWith('numParameterServers:')) {
-          return v.replace('numParameterServers:', '');
-        }
-      });
+      let numParameterServers = tags
+        .filter(v => v.startsWith('numParameterServers:'))
+        .map(v => v.replace('numParameterServers:', ''));
 
       return {
         blockName: b_name[0],
