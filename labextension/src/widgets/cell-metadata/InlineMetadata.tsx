@@ -238,10 +238,10 @@ export class InlineMetadata extends React.Component<IProps, IState> {
       : '';
     let text = '';
     if (distributeType === 'MultiWorkerMirroredStrategy') {
-      text = `Distribute: MultiWorkerMirroredStrategy with ${this.props.numWorkers} workers`;
+      text = `MultiWorkerMirroredStrategy with ${this.props.numWorkers.split(':')[1]} workers`;
     }
     else if (distributeType === 'ParameterServerStrategy') {
-      text = `Distribute: ParameterServerStrategy with ${this.props.numParameterServers} parameter servers and ${this.props.numWorkers} workers`;
+      text = `ParameterServerStrategy with ${this.props.numParameterServers.split(':')[1]} parameter servers and ${this.props.numWorkers.split(':')[1]} workers`;
     }
 
     return distributeType !== '' ? (
