@@ -172,12 +172,12 @@ export default class TagsUtils {
         Object.keys(limits).map(lim => 'limit:' + lim + ':' + limits[lim]),
       );
     if (distribute !== '') {
-      tags.concat([distribute]);
+      tags.push(distribute);
       if (numWorkers !== '') {
-        tags.concat([numWorkers]);
+        tags.push(numWorkers);
       }
       if (numParameterServers !== ''){
-        tags.concat([numParameterServers]);
+        tags.push(numParameterServers);
       }
     }
     console.log(tags)
