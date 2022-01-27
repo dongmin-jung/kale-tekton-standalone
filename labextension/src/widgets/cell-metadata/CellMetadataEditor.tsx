@@ -346,10 +346,10 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
             distribute = 'distribute:' + action.distributeValue;
             break;
           case 'numWorkers':
-            numWorkers = 'distribute:' + action.distributeValue;
+            numWorkers = 'numWorkers:' + action.distributeValue;
             break;
           case 'numParameterServers':
-            numParameterServers = 'distribute:' + action.distributeValue;
+            numParameterServers = 'numParameterServers:' + action.distributeValue;
             break;
         }
       }
