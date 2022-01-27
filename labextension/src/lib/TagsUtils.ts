@@ -151,6 +151,7 @@ export default class TagsUtils {
     save: boolean,
   ): Promise<any> {
     console.log('setKaleCellTags');
+    console.log(metadata);
     // make the dict to save to tags
     let nb = metadata.blockName;
     // not a reserved name
