@@ -1,5 +1,5 @@
-pip3 install /root/kale-tekton-standalone/backend/.
-cd /root/kale-tekton-standalone/labextension
+pip3 install /root/dm/kale-tekton-standalone/backend/.
+cd /root/dm/kale-tekton-standalone/labextension
 jlpm install
 jlpm run build
 jupyter labextension install .

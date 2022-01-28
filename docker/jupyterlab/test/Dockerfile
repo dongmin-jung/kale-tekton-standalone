@@ -42,7 +42,7 @@ RUN pip3 install --upgrade pip && \
 # Install Kale from KALE_BRANCH (defaults to "master")
 # ARG KALE_BRANCH="master"
 WORKDIR /
-RUN git clone https://github.com/tmax-cloud/kale-tekton-standalone.git
+RUN git clone https://github.com/dongmin-jung/kale-tekton-standalone.git
 
 WORKDIR /kale-tekton-standalone/backend
 RUN pip3 install --upgrade .
