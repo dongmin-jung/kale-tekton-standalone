@@ -56,8 +56,8 @@ LIMITS_TAG = r'^limit:([_a-z-\.\/]+):([_a-zA-Z0-9\.]+)$'
 DISTRIBUTE_TAG = r'^distribute:[a-zA-Z]+$'
 MULTI_WORKER_MIRRORED_STRATEGY_TAG = r'^distribute:MultiWorkerMirroredStrategy$'
 PARAMETER_SERVER_STRATEGY_TAG = r'^distribute:ParameterServerStrategy$'
-PARAMETER_SERVERS_TAG = r'^parameterServers:[1-9][0-9]*$'
-WORKERS_TAG = r'^workers:[1-9][0-9]*$'
+PARAMETER_SERVERS_TAG = r'^numParameterServers:[1-9][0-9]*$'
+WORKERS_TAG = r'^numWorkers:[1-9][0-9]*$'
 
 _TAGS_LANGUAGE = [SKIP_TAG,
                   IMPORT_TAG,
@@ -276,7 +276,7 @@ class NotebookProcessor(BaseProcessor):
 
             if(any(re.match(MULTI_WORKER_MIRRORED_STRATEGY_TAG, t) for t in c.metadata['tags'])):
                 # 해당 셀이 코드 셀이고 MultiWorkerMirroredStrategy 태그가 있는 상황 보장됨
-                # block:name 태그가 없거나 workers:n 태그가 없으면 에러
+                # block:name 태그가 없거나 numWorkers:n 태그가 없으면 에러
                 # c.metadata = {"tags":["block:first","prev:data","prev:variables","workers:3","MultiWorkerMirroredStrategy"]}
                 if (not (any(re.match(BLOCK_TAG, t)
                             for t in c.metadata['tags']))):
@@ -286,14 +286,14 @@ class NotebookProcessor(BaseProcessor):
                     raise ValueError('"MultiWorkerMirroredStrategy" tag cannot be used with "ParameterServerStrategy" tag.')
                 if (any(re.match(PARAMETER_SERVERS_TAG, t)
                             for t in c.metadata['tags'])):
-                    raise ValueError('"MultiWorkerMirroredStrategy" tag cannot be used with "parameterServers:n" tag.')
+                    raise ValueError('"MultiWorkerMirroredStrategy" tag cannot be used with "numParameterServers:n" tag.')
                 if (not (any(re.match(WORKERS_TAG, t)
                             for t in c.metadata['tags']))):
-                    raise ValueError('"MultiWorkerMirroredStrategy" tag must be used with "workers:n" tag, where n is a positive integer.')
+                    raise ValueError('"MultiWorkerMirroredStrategy" tag must be used with "numWorkers:n" tag, where n is a positive integer.')
                 if (sum(bool(re.match(WORKERS_TAG, t)) for t in c.metadata['tags']) > 1):
-                    raise ValueError('"workers:n" tag must be unique.')
+                    raise ValueError('"numWorkers:n" tag must be unique.')
 
-                # 해당 셀에 MultiWorkerMirroredStrategy, block:name, workers:n 태그가 모두 있는 상황 보장됨
+                # 해당 셀에 MultiWorkerMirroredStrategy, block:name, numWorkers:n 태그가 모두 있는 상황 보장됨
                 # notebook의 multi worker dict에 해당 cell 정보 추가
                 # {} -> {"first":3} -> {"first":3, "second":4} -> ...
                 isMultiWorkerMirroredStrategy = True # 추후에 다시 셀들을 순회하면서 수정할 때 사용하기 위한 플래그
@@ -305,8 +305,8 @@ class NotebookProcessor(BaseProcessor):
                         stepName = t.split(':').pop(1)
                         for _t in c.metadata['tags']:
                             if (re.match(WORKERS_TAG, _t)):
-                                # 태그를 다시 처음부터 순회하며 workers:n 태그를 찾음
-                                # workers:n 태그는 유일할 것이므로 필요한 작업 끝나면 break
+                                # 태그를 다시 처음부터 순회하며 numWorkers:n 태그를 찾음
+                                # numWorkers:n 태그는 유일할 것이므로 필요한 작업 끝나면 break
                                 numWorkersStr = _t.split(':').pop(1)
                                 workersDict[stepName] = int(numWorkersStr)
                                 break
@@ -314,7 +314,7 @@ class NotebookProcessor(BaseProcessor):
 
                 # 셀의 소스에 TF_CONFIG 세팅하는 코드를 붙여준다.
                 # NUM_WORKERS와 PORT도 설정해준다.
-                SET_TF_CONFIG = '''
+                SET_TF_CONFIG_FOR_MULTI_WORKER_MIRRORED_STRATEGY = '''
 import os
 import time
 import json
@@ -385,29 +385,23 @@ while True:
         continue
 
 '''
-                SET_TF_CONFIG = SET_TF_CONFIG.replace('@@NUM_WORKERS@@', numWorkersStr)
-                SET_TF_CONFIG = SET_TF_CONFIG.replace('@@PORT@@', '12345')
+                SET_TF_CONFIG_FOR_MULTI_WORKER_MIRRORED_STRATEGY = SET_TF_CONFIG_FOR_MULTI_WORKER_MIRRORED_STRATEGY.replace('@@NUM_WORKERS@@', numWorkersStr)
+                SET_TF_CONFIG_FOR_MULTI_WORKER_MIRRORED_STRATEGY = SET_TF_CONFIG_FOR_MULTI_WORKER_MIRRORED_STRATEGY.replace('@@PORT@@', '12345')
                 # SET_TF_CONFIG 안에 worker 개수를 대입해주는 것도 필요하다.
                 # SET_TF_CONFIG_LIST = [x + '\n' for x in SET_TF_CONFIG.split('\n')]
                 # c.source = SET_TF_CONFIG_LIST + c.source
-                c.source = SET_TF_CONFIG + c.source
+                c.source = SET_TF_CONFIG_FOR_MULTI_WORKER_MIRRORED_STRATEGY + c.source
                 # 알고보니 c.source가 list가 아니라 string이다...
 
             # 노트북의 모든 셀들에 대해 loop 종료
             # 모든 multi worker 셀에 TF_CONFIG 세팅 코드 삽입 완료
             # multi worker dict에 name과 worker수 저장 완료 {"first":3, "second":4}
 
-        if (isMultiWorkerMirroredStrategy):
-            # 노트북에 multi worker 셀이 없으면 이 단계가 필요 없음
+            if (isMultiWorkerMirroredStrategy):
 
-            # 모든 셀들의 "prev:name" 태그들을 보고, (multi worker dict를 참조하여) 필요시 번호를 붙여준 후,
-            # multi worker 셀들을 찾아서 복제하면서 "block:name" 뒤에 번호를 붙여준다.
-                # 주의: prev:name 수정이 먼저이고 복제가 나중이어야 한다.
-                # (prev:name 태그들 수정사항이 반영된 채 복제되어야 하기 때문)
+                SET_TF_CONFIG_FOR_PARAMETER_SERVER_STRATEGY = '''
 
-            # 먼저 prev:name 태그들을 찾아서 수정한다.
-            # 수정이 끝난 다음 새로운 반복문을 만들고,
-            # multi worker 셀들을 찾아 복제하면서 block:name 뒤에 번호를 붙여준다.
+'''
 
             for c in self.notebook.cells:
                 if not ((c.cell_type == "code")

@@ -56,8 +56,8 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
     };
   };
 
-  const distribute = props.distribute || '';
-  const numWorkers = props.numWorkers || '';
+  const distribute = props.distribute.split(':')[1] || '';
+  const numWorkers = props.numWorkers.split(':')[1] || '';
 
   return (
     <Dialog
@@ -112,7 +112,9 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
                       distributeAction('update', 'numWorkers', '1'),
                     ]);
                   } else {
-                    props.updateDistribute([distributeAction('delete', '','')]);
+                    props.updateDistribute([
+                      distributeAction('delete', '','')
+                    ]);
                   }
                 }}
                 color="primary"
@@ -140,7 +142,10 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
                 label="Number of Workers"
                 value={parseInt(numWorkers) || 1}
                 updateValue={(v: number) =>
-                  props.updateDistribute([distributeAction('update', 'numWorkers', v.toString())])
+                  props.updateDistribute([
+                    distributeAction('delete', '', ''),
+                    distributeAction('update', 'numWorkers', v.toString()),
+                  ])
                 }
                 style={{ width: '95%' }}
               />

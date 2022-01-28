@@ -433,8 +433,8 @@ export class KubeflowKaleLeftPanel extends React.Component<IProps, IState> {
         notebook,
         KALE_NOTEBOOK_METADATA_KEY,
       );
-      console.log('Kubeflow metadata:');
-      console.log(notebookMetadata);
+      // console.log('Kubeflow metadata:');
+      // console.log(notebookMetadata);
 
       if (this.props.backend) {
         // Retrieve the notebook's namespace
@@ -659,7 +659,7 @@ export class KubeflowKaleLeftPanel extends React.Component<IProps, IState> {
         .length > 0
     ) {
       const task = await commands.runSnapshotProcedure(_updateDeployProgress);
-      console.log(task);
+      // console.log(task);
       if (!task) {
         this.setState({ runDeployment: false });
         return;
