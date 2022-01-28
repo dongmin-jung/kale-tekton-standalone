@@ -118,7 +118,7 @@ export default class Commands {
     }
 
     if (task.status === 'success') {
-      // console.log('Snapshotting successful!');
+      console.log('Snapshotting successful!');
       return task;
     } else if (task.status === 'error') {
       console.error('Snapshotting failed');
@@ -186,7 +186,7 @@ export default class Commands {
     const cmd: string =
       `from kale.rpc.nb import unmarshal_data as __kale_rpc_unmarshal_data\n` +
       `locals().update(__kale_rpc_unmarshal_data("${nbFileName}"))`;
-    // console.log('Executing command: ' + cmd);
+    console.log('Executing command: ' + cmd);
     await NotebookUtils.sendKernelRequestFromNotebook(this._notebook, cmd, {});
   };
 

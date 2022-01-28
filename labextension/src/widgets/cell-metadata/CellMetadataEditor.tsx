@@ -198,7 +198,6 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     state: Readonly<IState>,
     props: Readonly<IProps>,
   ): IState {
-    // console.log('updateBlockDependenciesChoices');
     if (!props.notebook) {
       return null;
     }
@@ -222,7 +221,6 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     state: Readonly<IState>,
     props: Readonly<IProps>,
   ): IState {
-    // console.log('updatePreviousStepName');
     if (!props.notebook) {
       return null;
     }
@@ -239,7 +237,6 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
   }
 
   updateCurrentBlockName = (value: string) => {
-    // console.log('updateCurrentBlockName');
     const oldBlockName: string = this.props.stepName;
     let currentCellMetadata = {
       prevBlockNames: this.props.stepDependencies,
@@ -264,7 +261,6 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
    * Even handler of the MultiSelect used to select the dependencies of a block
    */
   updatePrevBlocksNames = (previousBlocks: string[]) => {
-    // console.log('updatePrevBlockNames');
     let currentCellMetadata = {
       blockName: this.props.stepName,
       limits: this.props.limits,
@@ -292,7 +288,6 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
       limitValue?: string;
     }[],
   ) => {
-    // console.log('updateCurrentLimits');
     let limits = { ...this.props.limits };
     actions.forEach(action => {
       if (action.action === 'update') {
@@ -333,13 +328,11 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
       distributeValue: string;
     }[],
   ) => {
-    // console.log('updateCurrentDistribute');
     let distribute = this.props.distribute;
     let numParameterServers = this.props.numParameterServers;
     let numWorkers = this.props.numWorkers;
     actions.forEach(action => {
       if (action.action === 'update') {
-        // console.log('update action');
         // console.log(action);
         switch(action.distributeKey){
           case 'distribute':
@@ -354,7 +347,6 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
         }
       }
       else if (action.action === 'delete') {
-        // console.log('delete action');
         distribute = '';
         numWorkers = '';
         numParameterServers = '';
@@ -416,7 +408,6 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
   }
 
   toggleTagsEditorMultiWorkerDialog() {
-    // console.log('toggleTagsEditorMultiWorkerDialog');
     this.setState({
       cellMetadataEditorMultiWorkerDialog: !this.state.cellMetadataEditorMultiWorkerDialog,
     });

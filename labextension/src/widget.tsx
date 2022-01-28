@@ -146,7 +146,7 @@ async function activate(
         server_root: PageConfig.getOption('serverRoot'),
       });
       if (path) {
-        // console.log('Resuming notebook ' + path);
+        console.log('Resuming notebook ' + path);
         // open the notebook panel
         reveal_widget = docManager.openOrReveal(path);
       }
@@ -166,7 +166,7 @@ async function activate(
   // Creates the left side bar widget once the app has fully started
   lab.started.then(() => {
     // show list of commands in the commandRegistry
-    // // console.log(lab.commands.listCommands());
+    // console.log(lab.commands.listCommands());
     widget = ReactWidget.create(
       <KubeflowKaleLeftPanel
         lab={lab}

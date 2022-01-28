@@ -209,7 +209,6 @@ export class InlineMetadata extends React.Component<IProps, IState> {
   }
 
   createLimitsText() {
-    // console.log('createLimitsText');
     const gpuType = Object.keys(this.props.limits).includes('nvidia.com/gpu')
       ? 'nvidia.com/gpu'
       : Object.keys(this.props.limits).includes('amd.com/gpu')
@@ -229,7 +228,6 @@ export class InlineMetadata extends React.Component<IProps, IState> {
   }
 
   createDistributeText() {
-    // console.log('createDistributeText');
     // console.log(this.props);
     const distributeType = this.props.distribute === 'distribute:MultiWorkerMirroredStrategy'
       ? 'MultiWorkerMirroredStrategy'

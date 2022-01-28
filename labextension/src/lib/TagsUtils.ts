@@ -84,7 +84,6 @@ export default class TagsUtils {
     notebook: Notebook,
     index: number,
   ): IKaleCellTags {
-    // console.log('getKaleCellTags');
     const tags: string[] = CellUtils.getCellMetaData(notebook, index, 'tags');
     if (tags) {
       let b_name = tags.map(v => {
@@ -161,11 +160,8 @@ export default class TagsUtils {
     const stepDependencies = metadata.prevBlockNames || [];
     const limits = metadata.limits || {};
     const distribute = metadata.distribute || '';
-    // console.log(distribute);
     const numWorkers = metadata.numWorkers || '';
-    // console.log(numWorkers);
     const numParameterServers = metadata.numParameterServers || '';
-    // console.log(numParameterServers);
     const tags = [nb]
       .concat(stepDependencies.map(v => 'prev:' + v))
       .concat(

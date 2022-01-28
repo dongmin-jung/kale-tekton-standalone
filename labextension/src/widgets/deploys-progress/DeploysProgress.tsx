@@ -91,7 +91,7 @@ export const DeploysProgress: React.FunctionComponent<DeploysProgress> = props =
 
   const _onPanelRemove = (index?: number) => {
     return () => {
-      // console.log('remove', index);
+      console.log('remove', index);
       props.onPanelRemove(index);
     };
   };

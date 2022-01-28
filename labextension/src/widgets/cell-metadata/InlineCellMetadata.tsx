@@ -220,7 +220,6 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
     if (!this.props.notebook) {
       return;
     }
-    // console.log('generateEditorsPropsAndInlineMetadata');
     const metadata: any[] = [];
     const editors: Editors = {};
     const cells = this.props.notebook.model.cells;

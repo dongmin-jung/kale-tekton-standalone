@@ -425,7 +425,7 @@ export default class NotebookUtilities {
       console.error(msg);
       if (content.traceback) {
         content.traceback.forEach((line: string) =>
-          // console.log(
+          console.log(
             line.replace(
               /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
               '',
