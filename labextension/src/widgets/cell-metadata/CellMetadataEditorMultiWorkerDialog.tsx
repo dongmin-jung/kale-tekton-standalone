@@ -29,7 +29,7 @@ import ColorUtils from '../../lib/ColorUtils';
 import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 
-interface ICellMetadataEditorMultiWorkerDialog {
+interface ICellMetadataEditorDistributeDialog {
   open: boolean;
   stepName: string;
   distribute: string;
@@ -39,7 +39,7 @@ interface ICellMetadataEditorMultiWorkerDialog {
   toggleDialog: Function;
 }
 
-export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellMetadataEditorMultiWorkerDialog> = props => {
+export const CellMetadataEditorDistributeDialog: React.FunctionComponent<ICellMetadataEditorDistributeDialog> = props => {
   const handleClose = () => {
     props.toggleDialog();
   };

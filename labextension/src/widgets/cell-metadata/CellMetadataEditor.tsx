@@ -23,7 +23,7 @@ import ColorUtils from '../../lib/ColorUtils';
 import { CellMetadataContext } from '../../lib/CellMetadataContext';
 import { Button, IconButton } from '@material-ui/core';
 import { CellMetadataEditorDialog } from './CellMetadataEditorDialog';
-import { CellMetadataEditorMultiWorkerDialog } from './CellMetadataEditorMultiWorkerDialog';
+import { CellMetadataEditorDistributeDialog } from './CellMetadataEditorDistributeDialog';
 import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 import { SelectMulti } from '../../components/SelectMulti';
@@ -94,7 +94,7 @@ interface IState {
   // XXX (stefano): statement of updateBlockDependenciesChoices and
   // XXX (stefano): updatePreviousStepName don't allow me.
   cellMetadataEditorDialog?: boolean;
-  cellMetadataEditorMultiWorkerDialog?: boolean;
+  cellMetadataEditorDistributeDialog?: boolean;
 }
 
 const DefaultState: IState = {
@@ -102,7 +102,7 @@ const DefaultState: IState = {
   stepNameErrorMsg: STEP_NAME_ERROR_MSG,
   blockDependenciesChoices: [],
   cellMetadataEditorDialog: false,
-  cellMetadataEditorMultiWorkerDialog: false,
+  cellMetadataEditorDistributeDialog: false,
 };
 
 /**
@@ -122,7 +122,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     this.updateCurrentCellType = this.updateCurrentCellType.bind(this);
     this.updatePrevBlocksNames = this.updatePrevBlocksNames.bind(this);
     this.toggleTagsEditorDialog = this.toggleTagsEditorDialog.bind(this);
-    this.toggleTagsEditorMultiWorkerDialog = this.toggleTagsEditorMultiWorkerDialog.bind(this);
+    this.toggleTagsEditorDistributeDialog = this.toggleTagsEditorDistributeDialog.bind(this);
   }
 
   componentWillUnmount() {
@@ -319,7 +319,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
   };
 
   /**
-   * Event triggered when the the CellMetadataEditorMultiWorkerDialog dialog is closed
+   * Event triggered when the the CellMetadataEditorDistributeDialog dialog is closed
    */
    updateCurrentDistribute = (
     actions: {
@@ -407,9 +407,9 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     });
   }
 
-  toggleTagsEditorMultiWorkerDialog() {
+  toggleTagsEditorDistributeDialog() {
     this.setState({
-      cellMetadataEditorMultiWorkerDialog: !this.state.cellMetadataEditorMultiWorkerDialog,
+      cellMetadataEditorDistributeDialog: !this.state.cellMetadataEditorDistributeDialog,
     });
   }
 
@@ -505,7 +505,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     variant="contained"
                     size="medium"
                     title="MultiWorkerMirroredStrategy"
-                    onClick={_ => this.toggleTagsEditorMultiWorkerDialog()}
+                    onClick={_ => this.toggleTagsEditorDistributeDialog()}
                     style={{ width: '20%' }}
                   >
                     Multi
@@ -539,9 +539,9 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
           limits={this.props.limits || {}}
           updateLimits={this.updateCurrentLimits}
         />
-        <CellMetadataEditorMultiWorkerDialog
-          open={this.state.cellMetadataEditorMultiWorkerDialog}
-          toggleDialog={this.toggleTagsEditorMultiWorkerDialog}
+        <CellMetadataEditorDistributeDialog
+          open={this.state.cellMetadataEditorDistributeDialog}
+          toggleDialog={this.toggleTagsEditorDistributeDialog}
           stepName={this.props.stepName}
           updateDistribute={this.updateCurrentDistribute}
           distribute={this.props.distribute||''}
