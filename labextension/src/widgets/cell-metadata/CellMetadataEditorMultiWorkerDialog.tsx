@@ -56,8 +56,8 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
     };
   };
 
-  const distribute = props.distribute.split(':')[1] || '';
-  const numWorkers = props.numWorkers.split(':')[1] || '';
+  const distribute = props.distribute !== '' ? props.distribute.split(':')[1] : '';
+  const numWorkers = props.numWorkers !== '' ? props.numWorkers.split(':')[1] : '';
 
   return (
     <Dialog
@@ -143,7 +143,6 @@ export const CellMetadataEditorMultiWorkerDialog: React.FunctionComponent<ICellM
                 value={parseInt(numWorkers) || 1}
                 updateValue={(v: number) =>
                   props.updateDistribute([
-                    distributeAction('delete', '', ''),
                     distributeAction('update', 'numWorkers', v.toString()),
                   ])
                 }

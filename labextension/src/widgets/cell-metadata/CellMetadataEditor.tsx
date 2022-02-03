@@ -333,7 +333,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
     let numWorkers = this.props.numWorkers;
     actions.forEach(action => {
       if (action.action === 'update') {
-        // console.log(action);
+        console.log(action);
         switch(action.distributeKey){
           case 'distribute':
             distribute = 'distribute:' + action.distributeValue;

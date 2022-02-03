@@ -147,7 +147,7 @@ export const executeRpc = async (
     throw new KernelError(error);
   }
 
-  // console.log(msg.concat([output]));
+  console.log(msg.concat([output]));
   const raw_data = output.result.data['text/plain'];
   const json_data = deserialize(raw_data);
 
@@ -188,7 +188,7 @@ export const executeRpc = async (
     };
     throw new RPCError(error);
   } else {
-    // console.log(msg, parsedResult);
+    console.log(msg, parsedResult);
     return parsedResult.result;
   }
 };

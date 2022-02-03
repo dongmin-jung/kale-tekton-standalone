@@ -149,8 +149,8 @@ export default class TagsUtils {
     metadata: IKaleCellTags,
     save: boolean,
   ): Promise<any> {
-    // console.log('setKaleCellTags');
-    // console.log(metadata);
+    console.log('setKaleCellTags');
+    console.log(metadata);
     // make the dict to save to tags
     let nb = metadata.blockName;
     // not a reserved name
@@ -176,7 +176,7 @@ export default class TagsUtils {
         tags.push(numParameterServers);
       }
     }
-    // console.log(tags)
+    console.log(tags)
     return CellUtils.setCellMetaData(notebookPanel, index, 'tags', tags, save);
   }
 
