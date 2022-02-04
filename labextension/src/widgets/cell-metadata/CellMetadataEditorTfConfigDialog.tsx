@@ -155,6 +155,7 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
                   updateValue={()=>{}}
                   style={{ width: 'auto', float: 'left' }}
                 />
+              </Grid>
             </Grid>
             <Grid
               container
