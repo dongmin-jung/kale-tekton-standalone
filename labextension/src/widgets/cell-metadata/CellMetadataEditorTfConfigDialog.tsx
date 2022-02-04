@@ -135,34 +135,49 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
             alignItems="center"
             style={{ marginTop: '15px' }}
           >
-            <Grid item xs={12}>
-              <Select
-                disabled={distribute === ''}
-                variant="standard"
-                label="Strategy"
-                values={[
-                  {label:'MultiWorkerMirroredStrategy', value:'MultiWorkerMirroredStrategy'},
-                  // {label:'ParameterServerStrategy', value:'ParameterServerStrategy'}
-                ]}
-                value={distribute === '' ? null : distribute === 'MultiWorkerMirroredStrategy' ? 'MultiWorkerMirroredStrategy' : distribute === 'ParameterServerStrategy' ? 'ParameterServerStrategy' : null}
-                index={-1}
-                updateValue={()=>{}}
-                style={{ width: 'auto', float: 'left' }}
-              />
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Grid item xs={6}>
+                <Select
+                  disabled={distribute === ''}
+                  variant="standard"
+                  label="Strategy"
+                  values={[
+                    {label:'MultiWorkerMirroredStrategy', value:'MultiWorkerMirroredStrategy'},
+                    // {label:'ParameterServerStrategy', value:'ParameterServerStrategy'}
+                  ]}
+                  value={distribute === '' ? null : distribute === 'MultiWorkerMirroredStrategy' ? 'MultiWorkerMirroredStrategy' : distribute === 'ParameterServerStrategy' ? 'ParameterServerStrategy' : null}
+                  index={-1}
+                  updateValue={()=>{}}
+                  style={{ width: 'auto', float: 'left' }}
+                />
+              </Grid>
+              <Grid item xs={6}></Grid>
             </Grid>
-            <Grid item xs={6}>
-              <Input
-                disabled={numWorkers === ''}
-                variant="outlined"
-                label="Number of Workers"
-                value={parseInt(numWorkers) || 1}
-                updateValue={(v: number) =>
-                  props.updateDistribute([
-                    distributeAction('update', 'numWorkers', v.toString()),
-                  ])
-                }
-                style={{ width: '95%', float: 'left' }}
-              />
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Grid item xs={6}>
+                <Input
+                  disabled={numWorkers === ''}
+                  variant="outlined"
+                  label="Number of Workers"
+                  value={parseInt(numWorkers) || 1}
+                  updateValue={(v: number) =>
+                    props.updateDistribute([
+                      distributeAction('update', 'numWorkers', v.toString()),
+                    ])
+                  }
+                  style={{ width: '95%', float: 'left' }}
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
