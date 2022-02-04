@@ -135,7 +135,7 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
             alignItems="center"
             style={{ marginTop: '15px' }}
           >
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <Select
                 disabled={distribute === ''}
                 variant="standard"

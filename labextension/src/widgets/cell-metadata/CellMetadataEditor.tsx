@@ -448,7 +448,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                 label={'Cell type'}
                 index={0}
                 variant="outlined"
-                style={{ width: '30%' }}
+                style={{ width: '20%' }}
               />
 
               {cellType === 'step' ? (
@@ -460,7 +460,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                   regexErrorMsg={this.state.stepNameErrorMsg}
                   variant="outlined"
                   onBeforeUpdate={this.onBeforeUpdate}
-                  style={{ width: '30%' }}
+                  style={{ width: '25%' }}
                 />
               ) : (
                 ''
@@ -483,7 +483,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
               )}
 
               {cellType === 'step' ? (
-                <div style={{ padding: 0 }}>
+                <div style={{ padding: 0, width: '20%' }}>
                   <Button
                     disabled={
                       !(this.props.stepName && this.props.stepName.length > 0)
