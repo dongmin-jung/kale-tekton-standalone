@@ -483,7 +483,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
               )}
 
               {cellType === 'step' ? (
-                <div style={{ padding: 0, width: '20%' }}>
+                <div style={{ padding: 0, width: 'auto' }}>
                   <Button
                     disabled={
                       !(this.props.stepName && this.props.stepName.length > 0)
