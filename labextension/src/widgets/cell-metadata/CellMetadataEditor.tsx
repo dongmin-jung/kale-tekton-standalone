@@ -493,7 +493,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     size="small"
                     title="GPU"
                     onClick={_ => this.toggleTagsEditorDialog()}
-                    style={{ width: '5%' }}
+                    style={{ width: '5%', float: 'left' }}
                   >
                     GPU
                   </Button>
@@ -506,9 +506,9 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     size="medium"
                     title="MultiWorkerMirroredStrategy"
                     onClick={_ => this.toggleTagsEditorTfConfigDialog()}
-                    style={{ width: '20%' }}
+                    style={{ width: '20%', float: 'right' }}
                   >
-                    Multi
+                    Set TF_CONFIG
                   </Button>
                 </div>
               ) : (
