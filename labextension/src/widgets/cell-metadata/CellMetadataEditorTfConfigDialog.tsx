@@ -151,7 +151,7 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
                     // {label:'ParameterServerStrategy', value:'ParameterServerStrategy'}
                   ]}
                   value={distribute === '' ? null : distribute === 'MultiWorkerMirroredStrategy' ? 'MultiWorkerMirroredStrategy' : distribute === 'ParameterServerStrategy' ? 'ParameterServerStrategy' : null}
-                  index={-1}
+                  index={0}
                   updateValue={()=>{}}
                   style={{ width: 'auto', float: 'left' }}
                 />
