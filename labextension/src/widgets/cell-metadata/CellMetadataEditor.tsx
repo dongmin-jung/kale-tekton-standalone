@@ -493,7 +493,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     size="small"
                     title="GPU"
                     onClick={_ => this.toggleTagsEditorDialog()}
-                    style={{ width: 'auto' }}
+                    style={{ width: 'auto', float: 'left', verticalAlign: 'middle' }}
                   >
                     GPU
                   </Button>
@@ -506,7 +506,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     size="small"
                     title="Set TF_CONFIG"
                     onClick={_ => this.toggleTagsEditorTfConfigDialog()}
-                    style={{ width: 'auto', marginTop: '1px' }}
+                    style={{ width: 'auto', float: 'right', verticalAlign: 'middle' }}
                   >
                     Set TF_CONFIG
                   </Button>
