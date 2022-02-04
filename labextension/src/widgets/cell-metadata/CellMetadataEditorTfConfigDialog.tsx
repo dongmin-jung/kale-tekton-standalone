@@ -147,7 +147,7 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
                 value={distribute === '' ? null : distribute === 'MultiWorkerMirroredStrategy' ? 'MultiWorkerMirroredStrategy' : distribute === 'ParameterServerStrategy' ? 'ParameterServerStrategy' : null}
                 index={-1}
                 updateValue={()=>{}}
-                style={{ width: 'auto' }}
+                style={{ width: 'auto', float: 'left' }}
               />
             </Grid>
             <Grid item xs={6}>
@@ -161,7 +161,7 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
                     distributeAction('update', 'numWorkers', v.toString()),
                   ])
                 }
-                style={{ width: '95%' }}
+                style={{ width: '95%', float: 'left' }}
               />
             </Grid>
           </Grid>
