@@ -483,7 +483,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
               )}
 
               {cellType === 'step' ? (
-                <div style={{ padding: 0, width: '250px' }}>
+                <div style={{ padding: 0, width: '15%' }}>
                   <Button
                     disabled={
                       !(this.props.stepName && this.props.stepName.length > 0)
@@ -506,7 +506,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     size="small"
                     title="Set TF_CONFIG"
                     onClick={_ => this.toggleTagsEditorTfConfigDialog()}
-                    style={{ width: 'auto', float: 'right', verticalAlign: 'middle' }}
+                    style={{ width: 'auto', float: 'left', verticalAlign: 'middle' }}
                   >
                     Set TF_CONFIG
                   </Button>
