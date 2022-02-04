@@ -83,7 +83,7 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
               justify="flex-start"
               alignItems="center"
             >
-              <p>MultiWorkerMirroredStrategy for step </p>
+              <p>Set TF_CONFIG for step </p>
               <Chip
                 className={'kale-chip'}
                 style={{
@@ -136,6 +136,17 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
             style={{ marginTop: '15px' }}
           >
             <Grid item xs={6}>
+              <Select
+                variant="standard"
+                label="Strategy"
+                values={[
+                  {id:'MultiWorkerMirroredStrategy', name:'MultiWorkerMirroredStrategy'},
+                  {id:'ParameterServerStrategy', name:'ParameterServerStrategy'}
+                ]}
+                value={distribute === '' ? null : distribute === 'MultiWorkerMirroredStrategy' ? 'MultiWorkerMirroredStrategy' : distribute === 'ParameterServerStrategy' ? 'ParameterServerStrategy' : null}
+                // index={-1}
+                // updateValue={}
+              />
               <Input
                 disabled={numWorkers === ''}
                 variant="outlined"

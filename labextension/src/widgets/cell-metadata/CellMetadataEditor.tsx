@@ -503,8 +503,8 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     }
                     color="primary"
                     variant="contained"
-                    size="medium"
-                    title="MultiWorkerMirroredStrategy"
+                    size="small"
+                    title="Set TF_CONFIG"
                     onClick={_ => this.toggleTagsEditorTfConfigDialog()}
                     style={{ width: 'auto', marginTop: '1px' }}
                   >
