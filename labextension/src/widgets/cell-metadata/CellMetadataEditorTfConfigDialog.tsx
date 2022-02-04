@@ -133,13 +133,13 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
             direction="column"
             justify="space-between"
             alignItems="center"
-            style={{ marginTop: '15px' }}
           >
             <Grid
               container
               direction="row"
               justify="space-between"
               alignItems="center"
+              style={{ marginTop: '15px' }}
             >
               <Grid item xs={6}>
                 <Select
@@ -155,14 +155,13 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
                   updateValue={()=>{}}
                   style={{ width: 'auto', float: 'left' }}
                 />
-              </Grid>
-              <Grid item xs={6}></Grid>
             </Grid>
             <Grid
               container
               direction="row"
               justify="space-between"
               alignItems="center"
+              style={{ marginTop: '15px' }}
             >
               <Grid item xs={6}>
                 <Input

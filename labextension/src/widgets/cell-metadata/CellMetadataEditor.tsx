@@ -448,7 +448,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                 label={'Cell type'}
                 index={0}
                 variant="outlined"
-                style={{ width: 'calc(20% - 200px)' }}
+                style={{ width: '20%' }}
               />
 
               {cellType === 'step' ? (
@@ -460,7 +460,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                   regexErrorMsg={this.state.stepNameErrorMsg}
                   variant="outlined"
                   onBeforeUpdate={this.onBeforeUpdate}
-                  style={{ width: 'calc(30% - 200px)' }}
+                  style={{ width: '30%' }}
                 />
               ) : (
                 ''
@@ -476,7 +476,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                   options={this.state.blockDependenciesChoices}
                   variant="outlined"
                   selected={this.props.stepDependencies || []}
-                  style={{ width: 'calc(35% - 200px)' }}
+                  style={{ width: '35%' }}
                 />
               ) : (
                 ''
@@ -493,7 +493,7 @@ export class CellMetadataEditor extends React.Component<IProps, IState> {
                     size="small"
                     title="GPU"
                     onClick={_ => this.toggleTagsEditorDialog()}
-                    style={{ width: 'auto', float: 'left', verticalAlign: 'middle' }}
+                    style={{ width: '15%', float: 'left', verticalAlign: 'middle' }}
                   >
                     GPU
                   </Button>
