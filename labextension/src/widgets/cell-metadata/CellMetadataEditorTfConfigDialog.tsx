@@ -29,7 +29,7 @@ import ColorUtils from '../../lib/ColorUtils';
 import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 
-interface ICellMetadataEditorDistributeDialog {
+interface ICellMetadataEditorTfConfigDialog {
   open: boolean;
   stepName: string;
   distribute: string;
@@ -39,7 +39,7 @@ interface ICellMetadataEditorDistributeDialog {
   toggleDialog: Function;
 }
 
-export const CellMetadataEditorDistributeDialog: React.FunctionComponent<ICellMetadataEditorDistributeDialog> = props => {
+export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMetadataEditorTfConfigDialog> = props => {
   const handleClose = () => {
     props.toggleDialog();
   };
