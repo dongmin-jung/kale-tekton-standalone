@@ -114,15 +114,12 @@ export default class TagsUtils {
 
       let distribute = tags
         .filter(v => v.startsWith('distribute:'));
-        // .map(v => v.replace('distribute:', ''));
 
       let numWorkers = tags
         .filter(v => v.startsWith('numWorkers:'));
-        // .map(v => v.replace('numWorkers:', ''));
 
       let numParameterServers = tags
         .filter(v => v.startsWith('numParameterServers:'));
-        // .map(v => v.replace('numParameterServers:', ''));
 
       return {
         blockName: b_name[0],
@@ -149,8 +146,8 @@ export default class TagsUtils {
     metadata: IKaleCellTags,
     save: boolean,
   ): Promise<any> {
-    console.log('setKaleCellTags');
-    console.log(metadata);
+    // console.log('setKaleCellTags');
+    // console.log(metadata);
     // make the dict to save to tags
     let nb = metadata.blockName;
     // not a reserved name
@@ -176,7 +173,7 @@ export default class TagsUtils {
         tags.push(numParameterServers);
       }
     }
-    console.log(tags)
+    // console.log(tags)
     return CellUtils.setCellMetaData(notebookPanel, index, 'tags', tags, save);
   }
 

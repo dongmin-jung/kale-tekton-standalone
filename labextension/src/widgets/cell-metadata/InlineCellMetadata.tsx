@@ -258,7 +258,7 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
         numWorkers: tags.numWorkers || '',
         numParameterServers: tags.numParameterServers || '',
       };
-      console.log(editors[index]);
+      // console.log(editors[index]);
       metadata.push(
         <InlineMetadata
           key={index}
@@ -273,7 +273,7 @@ export class InlineCellsMetadata extends React.Component<IProps, IState> {
           cellIndex={index}
         />,
       );
-      console.log(metadata);
+      // console.log(metadata);
     }
 
     this.setState({
