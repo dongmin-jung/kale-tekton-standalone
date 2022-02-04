@@ -130,18 +130,19 @@ export const CellMetadataEditorTfConfigDialog: React.FunctionComponent<ICellMeta
         <Grid container direction="column" justify="center" alignItems="center">
           <Grid
             container
-            direction="row"
+            direction="column"
             justify="space-between"
             alignItems="center"
             style={{ marginTop: '15px' }}
           >
             <Grid item xs={6}>
               <Select
+                disabled={distribute === ''}
                 variant="standard"
                 label="Strategy"
                 values={[
                   {label:'MultiWorkerMirroredStrategy', value:'MultiWorkerMirroredStrategy'},
-                  {label:'ParameterServerStrategy', value:'ParameterServerStrategy'}
+                  // {label:'ParameterServerStrategy', value:'ParameterServerStrategy'}
                 ]}
                 value={distribute === '' ? null : distribute === 'MultiWorkerMirroredStrategy' ? 'MultiWorkerMirroredStrategy' : distribute === 'ParameterServerStrategy' ? 'ParameterServerStrategy' : null}
                 index={-1}
